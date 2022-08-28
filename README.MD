@@ -142,7 +142,7 @@ Change the value of ```DATA.ROOT``` in the ```config.yaml``` file to the KITTI d
 
 
 ## References
-The codes below are referenced.  
+The following repositories were referred.  
 - [MonoCon](https://github.com/Xianpeng919/MonoCon)
 - [mmdetection3d](https://github.com/open-mmlab/mmdetection3d)
 - [nuScenes-devkit](https://github.com/nutonomy/nuscenes-devkit)
