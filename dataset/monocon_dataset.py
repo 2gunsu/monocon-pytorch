@@ -197,17 +197,3 @@ class MonoConDataset(BaseKITTIMono3DDataset):
                 'img_metas': merged_metas, 
                 'calib': merged_calib, 
                 'label': merged_label}
-        
-        
-
-if __name__ == "__main__":
-    dataset = MonoConDataset(base_root='/home/user/SSD/KITTI', 
-                             split='train',
-                             transforms=default_train_transforms,
-                             filter_configs={
-                                 'min_height': 25,
-                                 'min_depth': 2,
-                                 'max_depth': 65,
-                                 'max_truncation': 0.5,
-                                 'max_occlusion': 2,
-                             })

@@ -149,10 +149,3 @@ class MonoconEngine(BaseEngine):
             self.model.train()
             tprint("Model is converted to train mode.")
         return eval_dict
-    
-    
-
-if __name__ == "__main__":
-    from config.monocon_configs import _C as cfg
-    engine = MonoconEngine(cfg)
-    # engine.train()
