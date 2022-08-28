@@ -1,0 +1,8 @@
+numpy==1.22.4
+numba==0.56.0
+opencv-python==4.6.0.66
+pandas==1.4.3
+PyYAML==6.0
+tensorboard==2.10.0
+tqdm==4.64.0
+yacs==0.1.8
