@@ -1,5 +1,5 @@
 # MonoCon (AAAI, 2022)
-This repository contains an unofficial implementation for **[MonoCon: Learning Auxiliary Monocular Contexts Helps Monocular 3D Object Detection (AAAI, 2022)](https://arxiv.org/abs/2112.04628)**.   
+This repository contains unofficial implementation for **[MonoCon: Learning Auxiliary Monocular Contexts Helps Monocular 3D Object Detection (AAAI, 2022)](https://arxiv.org/abs/2112.04628)**.   
 We have removed the dependency on [mmdetection3d](https://github.com/open-mmlab/mmdetection3d) from the original author's [code](https://github.com/Xianpeng919/MonoCon).
 
 <img src="resources/monocon.jpg">
@@ -77,7 +77,7 @@ The structure of the data files should be as below.
 
 ## Usage
 ### Training
-Just edit the items in ```'config/monocon_configs.py'``` before execution.
+Just edit the items in ```config/monocon_configs.py``` before execution.
 ```bash
 python train.py
 ```

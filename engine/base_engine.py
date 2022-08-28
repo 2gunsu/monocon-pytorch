@@ -129,6 +129,12 @@ class BaseEngine:
                 self._update_dict_to_writer(eval_dict, tag='eval')
                 
                 self.model.train()
+                
+                # Save Checkpoint (.pth)
+                self.save_checkpoint(post_fix=None)
+        
+        # Save Final Checkpoint (.pth)
+        self.save_checkpoint(post_fix='final')
     
     @decorator_timer
     def train_one_epoch(self):

@@ -6,7 +6,7 @@ _C = CN()
 _C.VERSION = 'v1.0'
 _C.DESCRIPTION = "MonoCon Default Configuration"
 
-_C.OUTPUT_DIR = ""                      # Output Directory
+_C.OUTPUT_DIR = "/home/user/Desktop/Geonsoo/monocon-pytorch/checkpoint/base"                      # Output Directory
 _C.GPU_ID = 0                           # Index of GPU to use
 
 
@@ -61,6 +61,6 @@ _C.SOLVER.CLIP_GRAD.MAX_NORM = 35
 
 # Period
 _C.PERIOD = CN()
-_C.PERIOD.EVAL_PERIOD = 1               # In Epochs / Set -1 if you don't want validation
-_C.PERIOD.LOG_PERIOD = 50               # In Steps
+_C.PERIOD.EVAL_PERIOD = 10               # In Epochs / Set -1 if you don't want validation
+_C.PERIOD.LOG_PERIOD = 100               # In Steps
 

@@ -112,9 +112,6 @@ class MonoconEngine(BaseEngine):
                 
             self._iter_update()
         self._epoch_update()
-        
-        # Save Checkpoint (.pth)
-        self.save_checkpoint(post_fix=None)
 
         # Return Average Loss
         epoch_loss = (sum(epoch_losses) / len(epoch_losses))
