@@ -6,7 +6,7 @@ _C = CN()
 _C.VERSION = 'v1.0'
 _C.DESCRIPTION = "MonoCon Default Configuration"
 
-_C.OUTPUT_DIR = "/home/user/Desktop/Geonsoo/monocon-pytorch/checkpoint/base"                      # Output Directory
+_C.OUTPUT_DIR = ""                      # Output Directory
 _C.GPU_ID = 0                           # Index of GPU to use
 
 
