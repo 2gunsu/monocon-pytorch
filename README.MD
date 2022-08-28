@@ -53,21 +53,21 @@ Click the three items below from the link to download it and unzip it into the s
 The structure of the data files should be as below.
 ```bash
 [ROOT]
-|
+│
 ├── training
-|   ├── calib
-|   |   ├── 000000.txt
-|   |   ├── 000001.txt
-|   |   └── ...
-|   ├── image_2
-|   |   ├── 000000.png
-|   |   ├── 000001.png
-|   |   └── ...
-|   └── label_2
-|       ├── 000000.txt
-|       ├── 000001.txt
-|       └── ...
-|
+│   ├── calib
+│   │   ├── 000000.txt
+│   │   ├── 000001.txt
+│   │   └── ...
+│   ├── image_2
+│   │   ├── 000000.png
+│   │   ├── 000001.png
+│   │   └── ...
+│   └── label_2
+│       ├── 000000.txt
+│       ├── 000001.txt
+│       └── ...
+│
 └── testing
     ├── calib
     ├── image_2
