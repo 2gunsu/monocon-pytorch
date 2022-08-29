@@ -5,7 +5,7 @@ import argparse
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from engine import MonoconEngine
-from utils.engine_utils import load_cfg
+from utils.engine_utils import tprint, load_cfg, generate_random_seed, set_random_seed
 
 
 # Arguments
@@ -36,10 +36,20 @@ torch.backends.cudnn.enabled = True
 torch.backends.cudnn.benchmark = True
 
 
-# Initialize Engine
+# Load Config
 cfg = load_cfg(args.config_file)
 cfg.GPU_ID = args.gpu_id
 
+
+# Set Random Seed
+seed = cfg.get('SEED', -1)
+seed = generate_random_seed(seed)
+set_random_seed(seed)
+
+tprint(f"Using Random Seed {seed}")
+
+
+# Initialize Engine
 engine = MonoconEngine(cfg, auto_resume=False)
 engine.load_checkpoint(args.checkpoint_file, check_version=True, verbose=True)
 

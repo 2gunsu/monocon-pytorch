@@ -1,8 +1,11 @@
 import os
 import sys
+import random
+import numpy as np
+import pandas as pd
+
 import torch
 import torch.nn as nn
-import pandas as pd
 
 from yacs.config import CfgNode
 from datetime import datetime
@@ -11,6 +14,21 @@ from contextlib import redirect_stdout
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from config.monocon_configs import _C as cfg
+
+
+def generate_random_seed(seed: int = None) -> int:
+    if seed is not None:
+        return seed
+    
+    seed = np.random.randint(2 ** 31)
+    return seed
+
+
+def set_random_seed(seed: int) -> None:
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
 
 
 def count_trainable_params(model: nn.Module):

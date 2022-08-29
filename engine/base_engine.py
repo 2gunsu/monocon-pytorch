@@ -258,10 +258,12 @@ class BaseEngine:
         print(f"\n==================== Engine Info ====================")
         print(f"- Root: {self.root}")
         print(f"- Version: {self.version}")
-        print(f"- Description: {self.description}\n")
+        print(f"- Description: {self.description}")
         
+        print(f"\n- Seed: {self.cfg.SEED}")
         print(f"- Device: GPU {self.cfg.GPU_ID} ({torch.cuda.get_device_name(self.cfg.GPU_ID)})")
-        print(f"- Model: {self.model.__class__.__name__} (# Params: {count_trainable_params(self.model)})")
+        
+        print(f"\n- Model: {self.model.__class__.__name__} (# Params: {count_trainable_params(self.model)})")
         print(f"- Optimizer: {self.optimizer.__class__.__name__}")
         print(f"- Scheduler: {self.scheduler.__class__.__name__}\n")
         
@@ -277,4 +279,4 @@ class BaseEngine:
     
     @property
     def current_device(self) -> torch.device:
-        return torch.device(torch.cuda.current_device())
+        return torch.device(f'cuda:{self.cfg.GPU_ID}')

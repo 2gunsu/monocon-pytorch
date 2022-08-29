@@ -4,7 +4,7 @@ import torch
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from engine import MonoconEngine
-from utils.engine_utils import get_default_cfg
+from utils.engine_utils import tprint, get_default_cfg, set_random_seed, generate_random_seed
 
 
 # Some Torch Settings
@@ -20,8 +20,19 @@ torch.backends.cudnn.benchmark = True
 # Get Config from 'config/monocon_configs.py'
 cfg = get_default_cfg()
 
+
+# Set Random Seed
+seed = cfg.get('SEED', -1)
+seed = generate_random_seed(seed)
+set_random_seed(seed)
+
+cfg.SEED = seed
+tprint(f"Using Random Seed {seed}")
+
+
 # Initialize Engine
 engine = MonoconEngine(cfg)
+
 
 # Start Training from Scratch
 # Output files will be saved to 'cfg.OUTPUT_DIR'.
