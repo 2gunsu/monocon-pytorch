@@ -118,15 +118,15 @@ Change the value of ```DATA.ROOT``` in the ```config.yaml``` file to the KITTI d
 
 
 ## Qualitative Results  
-### **000008.png** (Validation Set)  
+- 000008.png (Validation Set)  
 <img src="resources/000008_2d.png">  
 <img src="resources/000008_3d.png">  
 
-### **000134.png** (Validation Set)  
+- 000134.png (Validation Set)  
 <img src="resources/000134_2d.png">  
 <img src="resources/000134_3d.png">  
 
-### **000472.png** (Validation Set)  
+- 000472.png (Validation Set)  
 <img src="resources/000472_2d.png">  
 <img src="resources/000472_3d.png">  
 
@@ -137,7 +137,7 @@ Change the value of ```DATA.ROOT``` in the ```config.yaml``` file to the KITTI d
 - This repository is released.
 
 ### v1.0.1 (2022.08.29)
-- Visualization functions for 2D Box and 3D Box have been added.
+- Visualization functions for 2D Boxes and 3D Boxes have been added.
 
 
 ## Citation
