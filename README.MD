@@ -125,6 +125,8 @@ We got the following results when we conducted the training 5 times in a row, an
 | Try #3    | 23.61         | 16.85         | 14.79         |
 | Try #4    | 23.40         | 17.36         | 14.69         |
 | Try #5    | 24.29         | 17.95         | 15.32         |
+| **Mean**  | 24.57         | 17.92         | 15.24         |
+| **Std**   | 1.16          | 0.85          | 0.51          |
 
 
 ## Qualitative Results  
