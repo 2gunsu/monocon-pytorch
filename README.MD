@@ -140,6 +140,10 @@ We got the following results when we conducted the training 5 times in a row, an
 <img src="resources/000472_2d.png">  
 <img src="resources/000472_3d.png">  
 
+- 004122.png (Validation Set)  
+<img src="resources/004122_2d.png">  
+<img src="resources/004122_3d.png">  
+
 
 ## Change Log
 
