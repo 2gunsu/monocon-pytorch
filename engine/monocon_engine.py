@@ -152,7 +152,7 @@ class MonoconEngine(BaseEngine):
     @torch.no_grad()
     def visualize(self, 
                   output_dir: str, 
-                  draw_items: List[str] = ['2d', '3d']):
+                  draw_items: List[str] = ['bev', '2d', '3d']):
         
         cvt_flag = False
         if self.model.training:
@@ -170,7 +170,8 @@ class MonoconEngine(BaseEngine):
         visualizer = Visualizer(self.test_dataset, vis_format=vis_container)
         draw_item_to_func = {
             '2d': 'plot_bboxes_2d',
-            '3d': 'plot_bboxes_3d'}
+            '3d': 'plot_bboxes_3d',
+            'bev': 'plot_bev'}
         
         for draw_item in draw_items:
             save_dir = os.path.join(output_dir, draw_item)

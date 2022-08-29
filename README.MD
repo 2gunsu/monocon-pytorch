@@ -118,7 +118,7 @@ You can download the weight file and config file for the above pretrained model 
 Change the value of ```DATA.ROOT``` in the ```config.yaml``` file to the KITTI data path.  
 
 Depending on the starting seed, the above performance may not be reproduced.  
-We got the following results when we conducted the training 5 times in a row, and we can confirm that there is some deviation.  
+The table below shows the performance obtained through 5 independent training, and it can be seen that there is some performance deviation.   
 |           | AP40@Easy     | AP40@Mod.     | AP40@Hard     |
 | --------- | ---------     |-----------    |-----------    |
 | Try #1    | 26.03         | 19.02         | 15.92         |
@@ -131,9 +131,11 @@ We got the following results when we conducted the training 5 times in a row, an
 
 
 ## Qualitative Results  
+Visualizations for 2D Boxes, 3D Boxes, and BEV, respectively, from top to bottom for each sample.  
 - 000008.png (Validation Set)  
 <img src="resources/000008_2d.png">
 <img src="resources/000008_3d.png">  
+<img src="resources/000008_bev.png">  
 
 - 000134.png (Validation Set)  
 <img src="resources/000134_2d.png">

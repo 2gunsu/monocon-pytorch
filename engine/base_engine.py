@@ -18,7 +18,8 @@ from utils.engine_utils import tprint, export_cfg, load_cfg, count_trainable_par
 class BaseEngine:
     def __init__(self, 
                  cfg: Union[str, CfgNode], 
-                 auto_resume: bool = True):
+                 auto_resume: bool = True,
+                 is_test: bool = False):
         
         # Configuration
         if isinstance(cfg, str):
@@ -45,33 +46,36 @@ class BaseEngine:
         self.val_period = (cfg.PERIOD.EVAL_PERIOD)
         
         # Dataset and Data-Loader
-        self.train_dataset, self.train_loader = self.build_loader(is_train=True)
+        self.train_dataset, self.train_loader = \
+            self.build_loader(is_train=True) if not is_test else (None, None)
         self.test_dataset, self.test_loader = self.build_loader(is_train=False)
         
         # Model, Optimizer, Schduler
         self.model = self.build_model()
-        self.optimizer, self.scheduler = self.build_solver()
+        self.optimizer, self.scheduler = \
+            self.build_solver() if not is_test else (None, None)
         
         # Directory
         self.root = (cfg.OUTPUT_DIR)
         self.writer_dir = os.path.join(self.root, 'tf_logs')
         self.weight_dir = os.path.join(self.root, 'checkpoints')
         
-        exist = False
-        if os.path.isdir(self.weight_dir) and auto_resume:
-            pth_files = sorted(glob.glob(os.path.join(self.weight_dir, r'*.pth')))
-            if len(pth_files) > 0:
-                exist = True
-                latest_weight = pth_files[-1]
-                self.load_checkpoint(latest_weight)
-                tprint(f"Existing checkpoint '{latest_weight}' is found and loaded automatically.")
+        if not is_test:
+            exist = False
+            if os.path.isdir(self.weight_dir) and auto_resume:
+                pth_files = sorted(glob.glob(os.path.join(self.weight_dir, r'*.pth')))
+                if len(pth_files) > 0:
+                    exist = True
+                    latest_weight = pth_files[-1]
+                    self.load_checkpoint(latest_weight)
+                    tprint(f"Existing checkpoint '{latest_weight}' is found and loaded automatically.")
+            
+            if not exist:
+                for dir_ in [self.writer_dir, self.weight_dir]:
+                    os.makedirs(dir_, exist_ok=True)
         
-        if not exist:
-            for dir_ in [self.writer_dir, self.weight_dir]:
-                os.makedirs(dir_, exist_ok=True)
-        
-        # Writer
-        self.writer = SummaryWriter(self.writer_dir)
+            # Writer
+            self.writer = SummaryWriter(self.writer_dir)
         
         # Storage
         self.epoch_times = []

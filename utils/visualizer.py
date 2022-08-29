@@ -4,11 +4,11 @@ import sys
 import torch
 import numpy as np
 
+from torch.utils.data import Dataset
 from typing import Union, Tuple, List, Dict, Any
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from utils.geometry_ops import extract_corners_from_bboxes_3d, points_cam2img
-from dataset.base_dataset import BaseKITTIMono3DDataset
 
 
 CLASSES = ['Pedestrian', 'Cyclist', 'Car']
@@ -21,7 +21,7 @@ CLASS_IDX_TO_COLOR = {
 
 class Visualizer:
     def __init__(self, 
-                 dataset: BaseKITTIMono3DDataset,
+                 dataset: Dataset,
                  vis_format: List[Dict[str, Any]]):
         
         # Dataset which provides ground-truth annotations.
@@ -113,9 +113,62 @@ class Visualizer:
         else:
             return image
     
-    # TODO
+    
     def plot_bev(self, idx: int, save_path: str = None) -> Union[None, np.ndarray]:
-        raise NotImplementedError
+        
+        MAX_DIST = 60
+        SCALE = 10
+
+        # Create BEV Space
+        R = (MAX_DIST * SCALE)
+        space = np.zeros((R * 2, R * 2, 3), dtype=np.uint8)
+        
+        for theta in np.linspace(0, np.pi, 7):
+            space = cv2.line(space,
+                            pt1=(int(R - R * np.cos(theta)), int(R - R * np.sin(theta))),
+                            pt2=(R, R),
+                            color=(255, 255, 255), 
+                            thickness=1)
+        
+        for radius in np.linspace(0, R, 5):
+            if radius == 0:
+                continue
+            
+            space = cv2.circle(space, 
+                               center=(R, R), 
+                               radius=int(radius), 
+                               color=(255, 255, 255), 
+                               thickness=1)
+        space = space[:R, :, :]
+        
+        # Load 3D Predicted Boxes
+        pred_bboxes_3d = self.pred_bbox_3d[idx]['boxes_3d']                 # (N, 7)
+        pred_labels_3d = self.pred_bbox_3d[idx]['labels_3d']                # (N,)
+        
+        # Draw BEV Boxes on Space
+        if len(pred_bboxes_3d) > 0:
+            pred_bev = pred_bboxes_3d[:, [0, 2, 3, 5, 6]]                   # (N, 5) / (XYWHR)
+            
+            pred_bev[:, :-1] *= SCALE
+            pred_bev[:, 1] *= (-1)
+            pred_bev[:, :2] += R
+            
+            for idx, bev in enumerate(pred_bev):
+                
+                bev = tuple(bev.numpy())
+                box = cv2.boxPoints((bev[:2], bev[2:4], (bev[4] * 180 / np.pi)))
+                box = np.int0(box)
+                
+                label = pred_labels_3d[idx].item()
+                color = CLASS_IDX_TO_COLOR[label]
+                space = cv2.drawContours(space, [box], -1, color, thickness=2, lineType=cv2.LINE_AA)            
+        
+        if save_path is not None:
+            space = cv2.cvtColor(space, cv2.COLOR_RGB2BGR)
+            cv2.imwrite(save_path, space)
+        else:
+            return space
+        
     
     
     def _add_transparent_box(self, 

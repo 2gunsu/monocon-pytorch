@@ -50,7 +50,7 @@ tprint(f"Using Random Seed {seed}")
 
 
 # Initialize Engine
-engine = MonoconEngine(cfg, auto_resume=False)
+engine = MonoconEngine(cfg, auto_resume=False, is_test=True)
 engine.load_checkpoint(args.checkpoint_file, verbose=True)
 
 
@@ -63,4 +63,4 @@ if args.evaluate:
 # Visualize
 if args.visualize:
     tprint("Mode: Visualization")
-    engine.visualize(args.save_dir, draw_items=['2d', '3d'])
+    engine.visualize(args.save_dir, draw_items=['2d', '3d', 'bev'])
