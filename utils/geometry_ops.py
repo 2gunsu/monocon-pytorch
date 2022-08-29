@@ -21,6 +21,12 @@ def extract_corners_from_bboxes_3d(bboxes_3d: torch.Tensor) -> torch.Tensor:
                         |
                         v
                 down y
+                
+    * Args:
+        bboxes_3d (torch.Tensor): (N, 7)
+    
+    * Returns:
+        torch.Tensor with shape of (N, 8, 3)
     """
     
     bboxes_3d = bboxes_3d.detach()

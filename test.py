@@ -51,15 +51,16 @@ tprint(f"Using Random Seed {seed}")
 
 # Initialize Engine
 engine = MonoconEngine(cfg, auto_resume=False)
-engine.load_checkpoint(args.checkpoint_file, check_version=True, verbose=True)
+engine.load_checkpoint(args.checkpoint_file, verbose=True)
 
 
 # Evaluate
 if args.evaluate:
+    tprint("Mode: Evaluation")
     engine.evaluate()
 
 
 # Visualize
-# Unavailable Now
 if args.visualize:
-    raise NotImplementedError
+    tprint("Mode: Visualization")
+    engine.visualize(args.save_dir, draw_items=['2d', '3d'])

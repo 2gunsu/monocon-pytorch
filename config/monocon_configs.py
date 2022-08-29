@@ -3,10 +3,10 @@ from yacs.config import CfgNode as CN
 
 _C = CN()
 
-_C.VERSION = 'v1.0'
+_C.VERSION = 'v1.0.1'
 _C.DESCRIPTION = "MonoCon Default Configuration"
 
-_C.OUTPUT_DIR = "/home/user/Desktop/Geonsoo/monocon-pytorch/checkpoint/base-seed0"                      # Output Directory
+_C.OUTPUT_DIR = ""                      # Output Directory
 _C.SEED = 0                             # -1: Random Seed Selection
 _C.GPU_ID = 1                           # Index of GPU to use
 
@@ -62,6 +62,6 @@ _C.SOLVER.CLIP_GRAD.MAX_NORM = 35
 
 # Period
 _C.PERIOD = CN()
-_C.PERIOD.EVAL_PERIOD = 10               # In Epochs / Set -1 if you don't want validation
-_C.PERIOD.LOG_PERIOD = 100               # In Steps
+_C.PERIOD.EVAL_PERIOD = 5                   # In Epochs / Set -1 if you don't want validation
+_C.PERIOD.LOG_PERIOD = 100                  # In Steps
 

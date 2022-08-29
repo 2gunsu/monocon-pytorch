@@ -186,7 +186,6 @@ class BaseEngine:
     
     def load_checkpoint(self, 
                         ckpt_file: str, 
-                        check_version: bool = True,
                         verbose: bool = False) -> None:
         
         engine_dict = torch.load(ckpt_file)
@@ -194,13 +193,6 @@ class BaseEngine:
         
         # Load Engine Attributes
         attrs = engine_dict['engine_attrs']
-        if check_version:
-            cur_version = self.version
-            load_version = attrs.get('version', 'v1.0')
-            
-            assert (cur_version == load_version), \
-                f"Version of the engine(v{self.version}) is different from the one in the checkpoint(v{load_version})."
-        
         for attr_k, attr_v in attrs.items():
             setattr(self, attr_k, attr_v)
         

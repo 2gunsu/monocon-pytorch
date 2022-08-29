@@ -10,7 +10,7 @@ Unchecked items are currently being prepared.
 - [x] Single-GPU Training
 - [x] KITTI Evaluation
 - [ ] Multi-GPU Training
-- [ ] Visualization (Projected 3D Bounding Box + Bird Eye's View)
+- [x] Visualization (Projected 3D Bounding Box)
 
 
 ## Preparations
@@ -90,8 +90,6 @@ python test.py  --config_file       [FILL]  # Config file (.yaml file)
 ```
 
 ### Inference
-Since the visualization code has not been completed, the code below is **currently unavailable**.  
-It will be updated in a few days.  
 ```bash
 python test.py  --config_file       [FILL]  # Config file (.yaml file)
                 --checkpoint_file   [FILL]  # Checkpoint file (.pth file)
@@ -120,13 +118,26 @@ Change the value of ```DATA.ROOT``` in the ```config.yaml``` file to the KITTI d
 
 
 ## Qualitative Results  
-**[Will be Added Later]**
+### **000008.png** (Validation Set)  
+<img src="resources/000008_2d.png">  
+<img src="resources/000008_3d.png">  
+
+### **000134.png** (Validation Set)  
+<img src="resources/000134_2d.png">  
+<img src="resources/000134_3d.png">  
+
+### **000472.png** (Validation Set)  
+<img src="resources/000472_2d.png">  
+<img src="resources/000472_3d.png">  
 
 
 ## Change Log
 
-### v1.0 (2022.08.28)
+### v1.0.0 (2022.08.28)
 - This repository is released.
+
+### v1.0.1 (2022.08.29)
+- Visualization functions for 2D Box and 3D Box have been added.
 
 
 ## Citation

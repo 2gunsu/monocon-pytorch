@@ -7,6 +7,7 @@ from engine import MonoconEngine
 from utils.engine_utils import tprint, get_default_cfg, set_random_seed, generate_random_seed
 
 
+
 # Some Torch Settings
 torch_version = int(torch.__version__.split('.')[1])
 if torch_version >= 7:

@@ -59,13 +59,13 @@ class MonoConDetector(nn.Module):
             return pred_dict
         
     
-    def batch_eval(self, data_dict: Dict[str, Any]) -> Dict[str, Any]:
+    def batch_eval(self, data_dict: Dict[str, Any], get_vis_format: bool = False) -> Dict[str, Any]:
         if self.training:
             raise Exception(f"Model is in training mode. Please use '.eval()' first.")
         
         pred_dict = self.forward(data_dict, return_loss=False)
-        kitti_format = self.head._get_eval_formats(data_dict, pred_dict)
-        return kitti_format
+        eval_format = self.head._get_eval_formats(data_dict, pred_dict, get_vis_format=get_vis_format)
+        return eval_format
         
 
     def _extract_feat_from_data_dict(self, data_dict: Dict[str, Any]) -> torch.Tensor:

@@ -1,4 +1,5 @@
 .git
+_debug/
 __pycache__/
 pretrained/
 checkpoint/

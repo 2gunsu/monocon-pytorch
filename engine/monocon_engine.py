@@ -3,8 +3,8 @@ import sys
 import torch
 import torch.optim as optim
 
-from typing import Dict
 from tqdm.auto import tqdm
+from typing import Dict, List
 from yacs.config import CfgNode
 from torch.utils.data import DataLoader
 from torch.nn.utils import clip_grad_norm_
@@ -15,6 +15,7 @@ from model import MonoConDetector
 from dataset import MonoConDataset
 from solver import CyclicScheduler
 
+from utils.visualizer import Visualizer
 from utils.decorators import decorator_timer
 from utils.engine_utils import progress_to_string_bar, move_data_device, reduce_loss_dict, tprint
 
@@ -146,3 +147,41 @@ class MonoconEngine(BaseEngine):
             self.model.train()
             tprint("Model is converted to train mode.")
         return eval_dict
+
+    
+    @torch.no_grad()
+    def visualize(self, 
+                  output_dir: str, 
+                  draw_items: List[str] = ['2d', '3d']):
+        
+        cvt_flag = False
+        if self.model.training:
+            self.model.eval()
+            cvt_flag = True
+            tprint("Model is converted to eval mode.")
+        
+        vis_container = []
+        for test_data in tqdm(self.test_loader, desc="Collecting Results..."):
+            test_data = move_data_device(test_data, self.current_device)
+            vis_results = self.model.batch_eval(test_data, get_vis_format=True)
+            vis_container.extend(vis_results)
+            
+        
+        visualizer = Visualizer(self.test_dataset, vis_format=vis_container)
+        draw_item_to_func = {
+            '2d': 'plot_bboxes_2d',
+            '3d': 'plot_bboxes_3d'}
+        
+        for draw_item in draw_items:
+            save_dir = os.path.join(output_dir, draw_item)
+            os.makedirs(save_dir, exist_ok=True)
+            
+            for idx in tqdm(range(len(self.test_dataset)), desc=f"Visualizing '{draw_item.upper()}'..."):
+                draw_func = getattr(visualizer, draw_item_to_func[draw_item])
+                
+                ori_filename = os.path.basename(self.test_dataset[idx]['img_metas']['image_path'])
+                draw_func(idx, save_path=os.path.join(save_dir, ori_filename))
+                
+        if cvt_flag:
+            self.model.train()
+            tprint("Model is converted to train mode.")
