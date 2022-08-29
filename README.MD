@@ -129,19 +129,19 @@ We got the following results when we conducted the training 5 times in a row, an
 
 ## Qualitative Results  
 - 000008.png (Validation Set)  
-<img src="resources/000008_2d.png">  
+<img src="resources/000008_2d.png">
 <img src="resources/000008_3d.png">  
 
 - 000134.png (Validation Set)  
-<img src="resources/000134_2d.png">  
+<img src="resources/000134_2d.png">
 <img src="resources/000134_3d.png">  
 
 - 000472.png (Validation Set)  
-<img src="resources/000472_2d.png">  
+<img src="resources/000472_2d.png">
 <img src="resources/000472_3d.png">  
 
 - 004122.png (Validation Set)  
-<img src="resources/004122_2d.png">  
+<img src="resources/004122_2d.png">
 <img src="resources/004122_3d.png">  
 
 
