@@ -116,6 +116,16 @@ python test.py  --config_file       [FILL]  # Config file (.yaml file)
 You can download the weight file and config file for the above pretrained model [here](https://drive.google.com/drive/folders/1yVgt8cU-aHtoteATha_7_2U4TxseSrBX?usp=sharing).  
 Change the value of ```DATA.ROOT``` in the ```config.yaml``` file to the KITTI data path.  
 
+Depending on the starting seed, the above performance may not be reproduced.  
+We got the following results when we conducted the training 5 times in a row, and we can confirm that there is some deviation.  
+|           | AP40@Easy     | AP40@Mod.     | AP40@Hard     |
+| --------- | ---------     |-----------    |-----------    |
+| Try #1    | 26.03         | 19.02         | 15.92         |
+| Try #2    | 25.50         | 18.40         | 15.47         |
+| Try #3    | 23.61         | 16.85         | 14.79         |
+| Try #4    | 23.40         | 17.36         | 14.69         |
+| Try #5    | 24.29         | 17.95         | 15.32         |
+
 
 ## Qualitative Results  
 - 000008.png (Validation Set)  
