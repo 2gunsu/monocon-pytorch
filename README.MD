@@ -119,35 +119,38 @@ Change the value of ```DATA.ROOT``` in the ```config.yaml``` file to the KITTI d
 
 Depending on the starting seed, the above performance may not be reproduced.  
 The table below shows the performance obtained through 5 independent training, and it can be seen that there is some performance deviation.   
-|           | AP40@Easy     | AP40@Mod.     | AP40@Hard     |
-| --------- | ---------     |-----------    |-----------    |
-| Try #1    | 26.03         | 19.02         | 15.92         |
-| Try #2    | 25.50         | 18.40         | 15.47         |
-| Try #3    | 23.61         | 16.85         | 14.79         |
-| Try #4    | 23.40         | 17.36         | 14.69         |
-| Try #5    | 24.29         | 17.95         | 15.32         |
-| **Mean**  | 24.57         | 17.92         | 15.24         |
-| **Std**   | 1.16          | 0.85          | 0.51          |
+|               | AP40@Easy     | AP40@Mod.     | AP40@Hard     |
+| ---------     | ---------     |-----------    |-----------    |
+| Train #1      | 26.03         | 19.02         | 15.92         |
+| Train #2      | 25.50         | 18.40         | 15.47         |
+| Train #3      | 23.61         | 16.85         | 14.79         |
+| Train #4      | 23.40         | 17.36         | 14.69         |
+| Train #5      | 24.29         | 17.95         | 15.32         |
+| **Mean**      | 24.57         | 17.92         | 15.24         |
+| **Std**       | 1.16          | 0.85          | 0.51          |
 
 
 ## Qualitative Results  
 Visualizations for 2D Boxes, 3D Boxes, and BEV, respectively, from top to bottom for each sample.  
-- 000008.png (Validation Set)  
+- **000008.png** (Validation Set)  
 <img src="resources/000008_2d.png">
 <img src="resources/000008_3d.png">  
 <img src="resources/000008_bev.png">  
 
-- 000134.png (Validation Set)  
+- **000134.png** (Validation Set)  
 <img src="resources/000134_2d.png">
 <img src="resources/000134_3d.png">  
+<img src="resources/000134_bev.png">  
 
-- 000472.png (Validation Set)  
+- **000472.png** (Validation Set)  
 <img src="resources/000472_2d.png">
 <img src="resources/000472_3d.png">  
+<img src="resources/000472_bev.png">  
 
-- 004122.png (Validation Set)  
+- **004122.png** (Validation Set)  
 <img src="resources/004122_2d.png">
 <img src="resources/004122_3d.png">  
+<img src="resources/004122_bev.png">  
 
 
 ## Change Log

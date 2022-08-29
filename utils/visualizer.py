@@ -128,7 +128,8 @@ class Visualizer:
                             pt1=(int(R - R * np.cos(theta)), int(R - R * np.sin(theta))),
                             pt2=(R, R),
                             color=(255, 255, 255), 
-                            thickness=1)
+                            thickness=2,
+                            lineType=cv2.LINE_AA)
         
         for radius in np.linspace(0, R, 5):
             if radius == 0:
@@ -138,7 +139,8 @@ class Visualizer:
                                center=(R, R), 
                                radius=int(radius), 
                                color=(255, 255, 255), 
-                               thickness=1)
+                               thickness=2,
+                               lineType=cv2.LINE_AA)
         space = space[:R, :, :]
         
         # Load 3D Predicted Boxes
@@ -161,7 +163,7 @@ class Visualizer:
                 
                 label = pred_labels_3d[idx].item()
                 color = CLASS_IDX_TO_COLOR[label]
-                space = cv2.drawContours(space, [box], -1, color, thickness=2, lineType=cv2.LINE_AA)            
+                space = cv2.drawContours(space, [box], -1, color, thickness=-1, lineType=cv2.LINE_AA)            
         
         if save_path is not None:
             space = cv2.cvtColor(space, cv2.COLOR_RGB2BGR)
@@ -169,8 +171,7 @@ class Visualizer:
         else:
             return space
         
-    
-    
+        
     def _add_transparent_box(self, 
                              image: np.ndarray, 
                              box_coordinate: Tuple[int, int, int, int],
