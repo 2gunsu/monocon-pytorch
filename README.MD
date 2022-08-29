@@ -11,7 +11,7 @@ Unchecked items are currently being prepared.
 - [x] KITTI Evaluation
 - [ ] Multi-GPU Training
 - [x] Visualization (2D Bounding Box + Projected 3D Bounding Box)
-- [ ] Visualization (Bird Eye's View)
+- [x] Visualization (Bird Eye's View)
 
 
 ## Preparations
