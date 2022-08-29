@@ -1,5 +1,5 @@
 # MonoCon (AAAI, 2022)
-This repository contains unofficial implementation for **[MonoCon: Learning Auxiliary Monocular Contexts Helps Monocular 3D Object Detection (AAAI, 2022)](https://arxiv.org/abs/2112.04628)**.   
+This repository contains unofficial pytorch implementation for **[MonoCon: Learning Auxiliary Monocular Contexts Helps Monocular 3D Object Detection (AAAI, 2022)](https://arxiv.org/abs/2112.04628)**.   
 We have removed the dependency on [mmdetection3d](https://github.com/open-mmlab/mmdetection3d) from the original author's [code](https://github.com/Xianpeng919/MonoCon).
 
 <img src="resources/monocon.jpg">
@@ -10,7 +10,8 @@ Unchecked items are currently being prepared.
 - [x] Single-GPU Training
 - [x] KITTI Evaluation
 - [ ] Multi-GPU Training
-- [x] Visualization (Projected 3D Bounding Box)
+- [x] Visualization (2D Bounding Box + Projected 3D Bounding Box)
+- [ ] Visualization (Bird Eye's View)
 
 
 ## Preparations
