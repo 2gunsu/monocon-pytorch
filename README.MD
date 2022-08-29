@@ -159,7 +159,7 @@ Visualizations for 2D Boxes, 3D Boxes, and BEV, respectively, from top to bottom
 - This repository is released.
 
 ### v1.0.1 (2022.08.29)
-- Visualization functions for 2D Boxes and 3D Boxes have been added.
+- Visualization functions for 2D Boxes, 3D Boxes and BEV have been added.
 
 
 ## Citation
