@@ -32,6 +32,11 @@ class RandomCrop3D(BaseTransform):
         self.area_filter_thres = area_filter_thres
     
     def __call__(self, data_dict: Dict[str, Any]) -> Dict[str, Any]:
+        
+        img_shape = data_dict['img_metas']['ori_shape']
+        assert sum(np.array(self.crop_size) <= np.array(img_shape)) == 2, \
+            f"Crop size should be smaller than image size. (crop size: {self.crop_size}, image size: {img_shape})"
+        
         data_dict, is_cropped = self._select_crop_pos(data_dict)
         if not is_cropped:
             return data_dict
