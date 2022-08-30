@@ -59,7 +59,10 @@ class MonoConDetector(nn.Module):
             return pred_dict
         
     
-    def batch_eval(self, data_dict: Dict[str, Any], get_vis_format: bool = False) -> Dict[str, Any]:
+    def batch_eval(self, 
+                   data_dict: Dict[str, Any], 
+                   get_vis_format: bool = False) -> Dict[str, Any]:
+        
         if self.training:
             raise Exception(f"Model is in training mode. Please use '.eval()' first.")
         
