@@ -10,9 +10,9 @@ from torch.utils.data import DataLoader
 from torch.nn.utils import clip_grad_norm_
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from engine import BaseEngine
 from model import MonoConDetector
-from dataset import MonoConDataset
+from engine.base_engine import BaseEngine
+from dataset.monocon_dataset import MonoConDataset
 from solver import CyclicScheduler
 
 from utils.visualizer import Visualizer
@@ -132,8 +132,14 @@ class MonoconEngine(BaseEngine):
             'img_bbox': [],
             'img_bbox2d': []}
         
+        scale_hw = None
         for test_data in tqdm(self.test_loader, desc="Collecting Results..."):
             test_data = move_data_device(test_data, self.current_device)
+            
+            # If test data is resized,
+            if (scale_hw is None) and (test_data['img_metas'].get('scale_hw', False)):
+                scale_hw = test_data['img_metas']['scale_hw'][0]
+                
             eval_results = self.model.batch_eval(test_data)
             
             for field in ['img_bbox', 'img_bbox2d']:
@@ -141,6 +147,7 @@ class MonoconEngine(BaseEngine):
         
         eval_dict = self.test_dataset.evaluate(eval_container,
                                                eval_classes=['Pedestrian', 'Cyclist', 'Car'],
+                                               scale_hw=scale_hw,
                                                verbose=True)
         
         if cvt_flag:
