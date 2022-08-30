@@ -6,10 +6,47 @@ import numpy as np
 
 from numpy import random
 from numbers import Number
-from typing import Tuple, List, Dict, Any
+from typing import Tuple, Union, List, Dict, Any
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from transforms import BaseTransform
+
+
+class Resize3D(BaseTransform):
+    def __init__(self, target_hw: Union[int, Tuple[int, int]] = None):
+        super().__init__(True, True, True, True)
+        
+        if (target_hw is not None) and isinstance(target_hw, int):
+            target_hw = (target_hw, target_hw)
+        self.target_hw = target_hw
+        
+    def __call__(self, data_dict: Dict[str, Any]) -> Dict[str, Any]:
+        
+        if self.target_hw is None:
+            return data_dict
+         
+        # Resize Image
+        img = data_dict['img']                          # (H, W, C) / np.ndarray
+        ori_hw = img.shape[:2]
+        img = cv2.resize(img, self.target_hw[::-1])     # (target_H, target_W, C) / np.ndarray
+        data_dict['img'] = img
+        
+        # Get Rescale Factor
+        scale_hw = (np.array(self.target_hw) / np.array(ori_hw))
+        
+        # Update Meta
+        data_dict['img_metas']['scale_hw'] = scale_hw
+        data_dict['img_metas']['ori_shape'] = self.target_hw
+        
+        # Update Calib
+        data_dict['calib'].rescale(*scale_hw[::-1])
+        
+        # Resize Label
+        data_dict['label']['gt_bboxes'] *= np.array([*scale_hw[::-1], *scale_hw[::-1]])     # 'gt_bboxes'
+        data_dict['label']['centers2d'] *= scale_hw[::-1]                                   # 'centers2d'
+        data_dict['label']['gt_kpts_2d'] *= np.tile(scale_hw[::-1], 9)                      # 'gt_kpts_2d'
+        
+        return data_dict
 
 
 class PhotometricDistortion(BaseTransform):
@@ -412,5 +449,3 @@ class ToTensor(BaseTransform):
             data_dict['label'] = label
         return data_dict
     
-
-        
