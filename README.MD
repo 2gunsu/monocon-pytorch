@@ -78,7 +78,8 @@ The structure of the data files should be as below.
 
 ## Usage
 ### Training
-Just edit the items in ```config/monocon_configs.py``` before execution.
+Just edit the items in ```config/monocon_configs.py``` before execution.  
+If the directory ```_C.OUTPUT_DIR``` in ```monocon_configs.py``` already exists and incomplete checkpoints are found, it will automatically restart up to the target epoch by loading the latest checkpoint.  
 ```bash
 python train.py
 ```
