@@ -48,9 +48,10 @@ class MonoConDataset(BaseKITTIMono3DDataset):
                  split: str,
                  max_objs: int = 30,
                  transforms: List[BaseTransform] = None,
-                 filter_configs: Dict[str, Any] = None):
+                 filter_configs: Dict[str, Any] = None,
+                 **kwargs):
         
-        super().__init__(base_root=base_root, split=split)
+        super().__init__(base_root=base_root, split=split, **kwargs)
         
         self.max_objs = max_objs
         
@@ -197,3 +198,4 @@ class MonoConDataset(BaseKITTIMono3DDataset):
                 'img_metas': merged_metas, 
                 'calib': merged_calib, 
                 'label': merged_label}
+        
