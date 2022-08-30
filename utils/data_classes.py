@@ -88,6 +88,28 @@ class KITTICalibration:
         inv_Tr[0:3, 0:3] = np.transpose(Tr[0:3, 0:3])
         inv_Tr[0:3, 3] = np.dot(-np.transpose(Tr[0:3, 0:3]), Tr[0:3, 3])
         return inv_Tr
+    
+    
+    def rescale(self, scale_x: float = None, scale_y: float = None) -> None:
+        
+        if scale_x is None:
+            scale_x = 1.0
+        if scale_y is None:
+            scale_y = 1.0
+        
+        # Rescale
+        for mat in [self.P0, self.P1, self.P2, self.P3]:
+            mat[0, [0, 2, 3]] *= scale_x
+            mat[1, [1, 2, 3]] *= scale_y
+        
+        # Reassign
+        self.cu = self.P2[0, 2]
+        self.cv = self.P2[1, 2]
+        self.fu = self.P2[0, 0]
+        self.fv = self.P2[1, 1]
+        self.tx = self.P2[0, 3] / (-self.fu)
+        self.ty = self.P2[1, 3] / (-self.fv)
+            
 
 
 # Util class for single object
