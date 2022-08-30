@@ -17,7 +17,7 @@ from config.monocon_configs import _C as cfg
 
 
 def generate_random_seed(seed: int = None) -> int:
-    if seed is not None:
+    if (seed is not None) and (seed != -1):
         return seed
     
     seed = np.random.randint(2 ** 31)
