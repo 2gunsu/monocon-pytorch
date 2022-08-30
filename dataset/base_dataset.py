@@ -84,6 +84,7 @@ class BaseKITTIMono3DDataset(Dataset):
         return KITTIMultiObjects.get_objects_from_label(self.label_files[idx], calib)
     
     def collect_gt_infos(self, verbose: bool = False) -> List[Dict[str, Any]]:
+        
         # Entire objects which include 'DontCare' class are required for evaluation.
         # If 'ignored_flag' is True, Filtered objects are converted to the original objects.
         ignored_flag = False
@@ -119,6 +120,7 @@ class BaseKITTIMono3DDataset(Dataset):
                  kitti_format_results: Dict[str, Any],
                  eval_classes: List[str] = ['Pedestrian', 'Cyclist', 'Car'],
                  eval_types: List[str] = ['bbox', 'bev', '3d'],
+                 scale_hw: np.ndarray = None,
                  verbose: bool = True,
                  save_path: str = None) -> Dict[str, float]:
         
@@ -127,6 +129,12 @@ class BaseKITTIMono3DDataset(Dataset):
             gt_annos = [info['annos'] for info in gt_infos]
             
             self.gt_annos = gt_annos
+            
+        if scale_hw is not None:
+            multiplier = np.array([*scale_hw[::-1], *scale_hw[::-1]])
+            
+            for idx in range(len(self.gt_annos)):
+                self.gt_annos[idx]['bbox'] *= multiplier
         
         ap_dict = dict()
         
