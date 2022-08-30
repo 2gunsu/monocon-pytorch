@@ -459,7 +459,7 @@ class MonoConDenseHeads(nn.Module):
         
         depth = depth_pred[:, :, 0:1]                                                           # (B, K, 1)
         center3d = torch.cat([center2d, depth], dim=-1)                                         # (B, K, 3)
-        center3d = self.convert_pts2D_to_pts3D(center3d, batched_calib=data_dict['calib'])  # (B, K, 3)
+        center3d = self.convert_pts2D_to_pts3D(center3d, batched_calib=data_dict['calib'])      # (B, K, 3)
         
         dim = transpose_and_gather_feat(pred_dict['dim_pred'], indices)
         bboxes_3d = torch.cat([center3d, dim, rot_y], dim=-1)
