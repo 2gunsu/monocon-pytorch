@@ -120,7 +120,6 @@ class BaseKITTIMono3DDataset(Dataset):
                  kitti_format_results: Dict[str, Any],
                  eval_classes: List[str] = ['Pedestrian', 'Cyclist', 'Car'],
                  eval_types: List[str] = ['bbox', 'bev', '3d'],
-                 scale_hw: np.ndarray = None,
                  verbose: bool = True,
                  save_path: str = None) -> Dict[str, float]:
         
@@ -129,13 +128,7 @@ class BaseKITTIMono3DDataset(Dataset):
             gt_annos = [info['annos'] for info in gt_infos]
             
             self.gt_annos = gt_annos
-            
-        if scale_hw is not None:
-            multiplier = np.array([*scale_hw[::-1], *scale_hw[::-1]])
-            
-            for idx in range(len(self.gt_annos)):
-                self.gt_annos[idx]['bbox'] *= multiplier
-        
+
         ap_dict = dict()
         
         for name, result in kitti_format_results.items():

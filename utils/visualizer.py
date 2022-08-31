@@ -22,7 +22,8 @@ CLASS_IDX_TO_COLOR = {
 class Visualizer:
     def __init__(self, 
                  dataset: Dataset,
-                 vis_format: List[Dict[str, Any]]):
+                 vis_format: List[Dict[str, Any]],
+                 scale_hw: Tuple[float, float] = None):
         
         # Dataset which provides ground-truth annotations.
         # Length of the dataset must be equal to the length of 'vis_format'.
@@ -33,6 +34,11 @@ class Visualizer:
         # Parse 'vis_format'
         self.pred_bbox_2d = [f['img_bbox2d'] for f in vis_format]
         self.pred_bbox_3d = [f['img_bbox'] for f in vis_format]
+        
+        # Scale parameter needed to fit the predicted boxes to the original image.
+        if (scale_hw is None):
+            scale_hw = np.array([1., 1.])
+        self.scale_hw = scale_hw
     
     
     def get_labels(self, idx: int, search_key: Union[List[str], str]) -> List[np.ndarray]:
@@ -50,7 +56,6 @@ class Visualizer:
         
     
     def plot_bboxes_2d(self, idx: int, save_path: str = None) -> Union[None, np.ndarray]:
-        
         # Load Image
         image = self.dataset.load_image(idx)[0]         # (H, W, 3)
         
@@ -63,7 +68,8 @@ class Visualizer:
             
             color = CLASS_IDX_TO_COLOR[c_idx]
             for box in pred_bbox:
-                box = box[:-1].astype(np.int)
+                s = np.reciprocal(np.array([*self.scale_hw[::-1], *self.scale_hw[::-1]]))
+                box = (box[:-1] * s).astype(np.int)
                 image = self._add_transparent_box(image, box, color, alpha=0.2)
         
         if save_path is not None:
@@ -90,13 +96,14 @@ class Visualizer:
             # Draw 3D Boxes
             line_indices = ((0, 1), (0, 3), (0, 4), (1, 2), (1, 5), (3, 2), (3, 7),
                             (4, 5), (4, 7), (2, 6), (5, 6), (6, 7))
-            # pred_bboxes_3d = self._post_process_bboxes_3d(pred_bboxes_3d)
-            
+
             for bbox_3d, label_3d in zip(pred_bboxes_3d, pred_labels_3d):
-                corners = extract_corners_from_bboxes_3d(bbox_3d.unsqueeze(0))[0]           # (8, 3)
+                corners = extract_corners_from_bboxes_3d(bbox_3d.unsqueeze(0))[0]               # (8, 3)
                 
-                proj_corners = points_cam2img(corners, intrinsic_mat)                       # (8, 2)
-                proj_corners = (proj_corners - 1).round().astype(np.int)                    # (8, 2)
+                proj_corners = points_cam2img(corners, intrinsic_mat)                           # (8, 2)
+                
+                s = np.reciprocal(self.scale_hw[::-1])
+                proj_corners = ((proj_corners - 1).round() * s).astype(np.int)                  # (8, 2)
                 
                 color = CLASS_IDX_TO_COLOR[label_3d.item()]
                 for start, end in line_indices:

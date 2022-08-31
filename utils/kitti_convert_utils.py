@@ -99,6 +99,13 @@ def convert_to_kitti_3d(results_3d: List[Dict[str, torch.Tensor]],
                         calibs: List[KITTICalibration]) -> List[Dict[str, Any]]:
 
     returns = []
+    
+    if img_metas.get('scale_hw'):
+        scale_hw = img_metas['scale_hw'][0]
+    else:
+        scale_hw = (1., 1.,)  
+    scale_hw = np.array([*scale_hw[::-1], *scale_hw[::-1]])
+    scale_hw = np.reciprocal(scale_hw)
 
     for batch_idx, result_3d in enumerate(results_3d):
         
@@ -136,7 +143,7 @@ def convert_to_kitti_3d(results_3d: List[Dict[str, torch.Tensor]],
                 anno['truncated'].append(0.0)
                 anno['occluded'].append(0)
                 anno['alpha'].append(-np.arctan2(box[0], box[2]) + box[6])
-                anno['bbox'].append(bbox)
+                anno['bbox'].append(bbox * scale_hw)
                 anno['dimensions'].append(box[3:6])
                 anno['location'].append(box[:3])
                 anno['rotation_y'].append(box[6])
@@ -171,6 +178,13 @@ def convert_to_kitti_2d(results_2d: List[List[np.ndarray]],
     # Check Number of Classes
     num_classes = len(results_2d[0])
     assert num_classes == len(CLASSES)
+    
+    if img_metas.get('scale_hw'):
+        scale_hw = img_metas['scale_hw'][0]
+    else:
+        scale_hw = (1., 1.,)  
+    scale_hw = np.array([*scale_hw[::-1], *scale_hw[::-1]])
+    scale_hw = np.reciprocal(scale_hw)
     
     returns = []
     
@@ -217,7 +231,7 @@ def convert_to_kitti_2d(results_2d: List[List[np.ndarray]],
                     anno['truncated'].append(0.0)
                     anno['occluded'].append(0)
                     anno['alpha'].append(-10)
-                    anno['bbox'].append(class_bbox[box_idx, :4])
+                    anno['bbox'].append(class_bbox[box_idx, :4] * scale_hw)
                     anno['dimensions'].append(
                         np.zeros(shape=[3], dtype=np.float32))
                     anno['location'].append(

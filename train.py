@@ -3,7 +3,7 @@ import sys
 import torch
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from engine import MonoconEngine
+from engine.monocon_engine import MonoconEngine
 from utils.engine_utils import tprint, get_default_cfg, set_random_seed, generate_random_seed
 
 

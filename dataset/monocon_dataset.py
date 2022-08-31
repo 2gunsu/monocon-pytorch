@@ -198,4 +198,3 @@ class MonoConDataset(BaseKITTIMono3DDataset):
                 'img_metas': merged_metas, 
                 'calib': merged_calib, 
                 'label': merged_label}
-        

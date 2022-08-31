@@ -309,8 +309,7 @@ class MonoConDenseHeads(nn.Module):
             'loss_alpha_reg': loss_alpha_reg,
             'loss_depth': depth_loss}
         
-    
-    # Boxes used for visualization
+        
     def _get_bboxes(self, 
                     data_dict: Dict[str, Any],
                     pred_dict: Dict[str, torch.Tensor]) -> Tuple[torch.Tensor]:
@@ -340,6 +339,7 @@ class MonoConDenseHeads(nn.Module):
         
         #
         # (1) Convert the detection results to a list of numpy arrays.
+        #     Results from this stage will be used for visualization.
         #
         
         results_2d, results_3d = [], []
