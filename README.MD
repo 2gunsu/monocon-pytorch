@@ -153,6 +153,11 @@ Visualizations for 2D Boxes, 3D Boxes, and BEV, respectively, from top to bottom
 <img src="resources/004122_bev.png">  
 
 
+## Known Issues
+- **(2022.09.08)** It has been found that reducing the batch size causes the target data corresponding to that mini-batch to be empty, resulting in errors. 
+If possible, use a value greater than 4 as the batch size.
+
+
 ## Change Log
 
 ### v1.0.0 (2022.08.28)
