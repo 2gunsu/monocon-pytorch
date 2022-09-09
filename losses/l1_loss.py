@@ -9,6 +9,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from losses.utils import weighted_loss
 
 
+# TODO Handling an exception so that it can be handled even when the target data is empty
 @weighted_loss
 def l1_loss(pred: torch.Tensor, target: torch.Tensor) -> torch.Tensor:
     assert pred.size() == target.size() and target.numel() > 0

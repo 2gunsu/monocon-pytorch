@@ -32,13 +32,18 @@ if torch_version >= 7:
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False
 
-torch.backends.cudnn.enabled = True
-torch.backends.cudnn.benchmark = True
-
 
 # Load Config
 cfg = load_cfg(args.config_file)
 cfg.GPU_ID = args.gpu_id
+
+
+# Set Benchmark
+# If this is set to True, it may consume more memory. (Default: True)
+if cfg.get('USE_BENCHMARK', True):
+    torch.backends.cudnn.enabled = True
+    torch.backends.cudnn.benchmark = True
+    tprint(f"CuDNN Benchmark is enabled.")
 
 
 # Set Random Seed

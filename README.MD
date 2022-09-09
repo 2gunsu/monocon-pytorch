@@ -10,8 +10,10 @@ Unchecked items are currently being prepared.
 - [x] Single-GPU Training
 - [x] KITTI Evaluation
 - [ ] Multi-GPU Training
+- [ ] Fancy Logger
 - [x] Visualization (2D Bounding Box + Projected 3D Bounding Box)
 - [x] Visualization (Bird Eye's View)
+- [ ] Video Inference using KITTI Raw Data Sequences
 
 
 ## Preparations
@@ -79,6 +81,7 @@ The structure of the data files should be as below.
 ## Usage
 ### Training
 Just edit the items in ```config/monocon_configs.py``` before execution.  
+If you want less GPU memory consumption, set ```_C.USE_BENCHMARK``` to ```False```.
 ```bash
 python train.py
 ```
@@ -159,7 +162,7 @@ If possible, use a value greater than 4 as the batch size.
 
 
 ## Change Log
-This repository was last updated to **v1.0.2** on **2022.08.30**.  
+This repository was last updated to **v1.0.3** on **2022.09.09**.  
 Check [changelog.md](changelog.MD) for detailed update history.
 
 

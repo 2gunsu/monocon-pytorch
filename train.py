@@ -14,12 +14,17 @@ if torch_version >= 7:
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False
 
-torch.backends.cudnn.enabled = True
-torch.backends.cudnn.benchmark = True
-
 
 # Get Config from 'config/monocon_configs.py'
 cfg = get_default_cfg()
+
+
+# Set Benchmark
+# If this is set to True, it may consume more memory. (Default: True)
+if cfg.get('USE_BENCHMARK', True):
+    torch.backends.cudnn.enabled = True
+    torch.backends.cudnn.benchmark = True
+    tprint(f"CuDNN Benchmark is enabled.")
 
 
 # Set Random Seed

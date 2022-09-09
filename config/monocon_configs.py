@@ -3,12 +3,14 @@ from yacs.config import CfgNode as CN
 
 _C = CN()
 
-_C.VERSION = 'v1.0.2'
+_C.VERSION = 'v1.0.3'
 _C.DESCRIPTION = "MonoCon Default Configuration"
 
-_C.OUTPUT_DIR = ""                              # Output Directory
-_C.SEED = -1                                    # -1: Random Seed Selection
-_C.GPU_ID = 0                                   # Index of GPU to use
+_C.OUTPUT_DIR = ""                               # Output Directory
+_C.SEED = -1                                     # -1: Random Seed Selection
+_C.GPU_ID = 0                                    # Index of GPU to use
+
+_C.USE_BENCHMARK = True                          # Value of 'torch.backends.cudnn.benchmark' and 'torch.backends.cudnn.enabled'
 
 
 # Data
@@ -18,10 +20,6 @@ _C.DATA.BATCH_SIZE = 8
 _C.DATA.NUM_WORKERS = 4
 _C.DATA.TRAIN_SPLIT = 'train'
 _C.DATA.TEST_SPLIT = 'val'
-
-_C.DATA.STATS = CN()
-_C.DATA.STATS.MEAN = [123.675, 116.28, 103.53]
-_C.DATA.STATS.STD = [58.395, 57.12, 57.375]
 
 _C.DATA.FILTER = CN()
 _C.DATA.FILTER.MIN_HEIGHT = 25
