@@ -159,15 +159,8 @@ If possible, use a value greater than 4 as the batch size.
 
 
 ## Change Log
-
-### v1.0.0 (2022.08.28)
-- This repository is released.
-
-### v1.0.1 (2022.08.29)
-- Visualization functions for 2D Boxes, 3D Boxes, and BEV have been added.
-
-### v1.0.2 (2022.08.30)
-- Resize transform has been added. (```:class: 'Resize3D'```)
+This repository was last updated to v1.0.2 on 2022.08.30.  
+Check [changelog.md](changelog.MD) for detailed update history.
 
 
 ## Citation
