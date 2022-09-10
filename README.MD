@@ -4,10 +4,7 @@ We have removed the dependency on [mmdetection3d](https://github.com/open-mmlab/
 
 <img src="resources/monocon.jpg">  
 
-<img src="resources/raw_3d_video.gif" width="61%" style="display:inline;">
-<div style="display:inline;width:5px;"></div>
-<img src="resources/raw_bev_video.gif" width="36%" style="display:inline;">
-
+<img src="resources/raw_3d_video.gif">
 
 ## Features
 Unchecked items are currently being prepared.
