@@ -82,7 +82,7 @@ The structure of the data files should be as below.
 ## Usage
 ### Training
 Just edit the items in ```config/monocon_configs.py``` before execution.  
-If you want less GPU memory consumption, set ```_C.USE_BENCHMARK``` to ```False```.
+If your GPU memory is **less than 16GB**, please set ```_C.USE_BENCHMARK``` in ```config/monocon_configs.py``` to ```False```.
 ```bash
 python train.py
 ```
