@@ -67,10 +67,11 @@ def move_data_device(data_dict: Dict[str, Any],
         if isinstance(v, torch.Tensor):
             data_dict[k] = data_dict[k].to(device)
 
-    label = data_dict['label']
-    for k in label.keys():
-        label[k] = label[k].to(device)
-    data_dict['label'] = label
+    if 'label' in data_dict.keys():
+        label = data_dict['label']
+        for k in label.keys():
+            label[k] = label[k].to(device)
+        data_dict['label'] = label
     
     return data_dict
 

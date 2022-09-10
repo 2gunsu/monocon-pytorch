@@ -4,10 +4,12 @@ import sys
 import torch
 import numpy as np
 
+from tqdm.auto import tqdm
 from torch.utils.data import Dataset
 from typing import Union, Tuple, List, Dict, Any
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+from utils.engine_utils import tprint
 from utils.geometry_ops import extract_corners_from_bboxes_3d, points_cam2img
 
 
@@ -39,9 +41,16 @@ class Visualizer:
         if (scale_hw is None):
             scale_hw = np.array([1., 1.])
         self.scale_hw = scale_hw
+        
+        # Mode
+        self.mode = 'raw' if (dataset.__class__.__name__ == 'KITTIRawDataset') else 'normal'
     
     
     def get_labels(self, idx: int, search_key: Union[List[str], str]) -> List[np.ndarray]:
+        
+        assert (self.mode == 'normal'), \
+            "This method is only available in 'normal' mode."
+        
         label = self.dataset[idx]['label']
         mask = label['mask'].type(torch.BoolTensor)
         
@@ -56,8 +65,12 @@ class Visualizer:
         
     
     def plot_bboxes_2d(self, idx: int, save_path: str = None) -> Union[None, np.ndarray]:
+        
         # Load Image
-        image = self.dataset.load_image(idx)[0]         # (H, W, 3)
+        if self.mode == 'normal':
+            image = self.dataset.load_image(idx)[0]         # (H, W, 3)
+        else:
+            image = self.dataset[idx]['ori_img']
         
         # Load 2D Predicted Boxes and Draw
         pred_bboxes = self.pred_bbox_2d[idx]
@@ -82,10 +95,17 @@ class Visualizer:
     def plot_bboxes_3d(self, idx: int, save_path: str = None) -> Union[None, np.ndarray]:
         
         # Load Image
-        image = self.dataset.load_image(idx)[0]         # (H, W, 3)
+        if self.mode == 'normal':
+            image = self.dataset.load_image(idx)[0]         # (H, W, 3)
+        else:
+            image = self.dataset[idx]['ori_img']
         
         # Load Calib
-        calib = self.dataset.load_calib(idx)
+        if self.mode == 'normal':
+            calib = self.dataset.load_calib(idx)
+        else:
+            calib = self.dataset[idx]['calib'][0]
+            
         intrinsic_mat = calib.P2                        # (3, 4)
         
         # Load 3D Predicted Boxes
@@ -178,6 +198,41 @@ class Visualizer:
         else:
             return space
         
+        
+    def export_as_video(self,
+                        save_dir: str,
+                        plot_items: List[str] = ['2d', '3d', 'bev'],
+                        fps: int = 20) -> None:
+        
+        assert (self.mode == 'raw'), "This method is only available in 'raw' mode."
+        
+        item_to_draw_func = {
+            '2d': self.plot_bboxes_2d,
+            '3d': self.plot_bboxes_3d,
+            'bev': self.plot_bev}
+        
+        if not os.path.isdir(save_dir):
+            os.makedirs(save_dir)
+            
+        for plot_item in plot_items:
+            vid_file = os.path.join(save_dir, f'{plot_item}.mp4')
+            vis_results = []
+            
+            for idx in tqdm(range(len(self.dataset)), desc=f"Visualizing '{plot_item}'..."):
+                vis_result = item_to_draw_func[plot_item](idx, save_path=None)
+                vis_results.append(vis_result)
+            
+            img_size = vis_results[0].shape[:2][::-1]           # (W, H)    
+            vid_writer = cv2.VideoWriter(vid_file, cv2.VideoWriter_fourcc(*'mp4v'), fps, img_size)
+            
+            for v in vis_results:
+                v = v.astype(np.uint8)
+                v = cv2.cvtColor(v, code=cv2.COLOR_RGB2BGR)
+                vid_writer.write(v)
+            vid_writer.release()
+            
+            tprint(f"Video for '{plot_item}' is exported to '{vid_file}'.")
+            
         
     def _add_transparent_box(self, 
                              image: np.ndarray, 

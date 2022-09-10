@@ -2,7 +2,11 @@
 This repository contains unofficial pytorch implementation for **[MonoCon: Learning Auxiliary Monocular Contexts Helps Monocular 3D Object Detection (AAAI, 2022)](https://arxiv.org/abs/2112.04628)**.   
 We have removed the dependency on [mmdetection3d](https://github.com/open-mmlab/mmdetection3d) from the original author's [code](https://github.com/Xianpeng919/MonoCon).
 
-<img src="resources/monocon.jpg">
+<img src="resources/monocon.jpg">  
+
+<img src="resources/raw_3d_video.gif" width="61%" style="display:inline;">
+<div style="display:inline;width:5px;"></div>
+<img src="resources/raw_bev_video.gif" width="36%" style="display:inline;">
 
 
 ## Features
@@ -13,7 +17,7 @@ Unchecked items are currently being prepared.
 - [ ] Fancy Logger
 - [x] Visualization (2D Bounding Box + Projected 3D Bounding Box)
 - [x] Visualization (Bird Eye's View)
-- [ ] Video Inference using KITTI Raw Data Sequences
+- [x] Video Inference using KITTI Raw Data Sequences
 
 
 ## Preparations
@@ -162,7 +166,7 @@ If possible, use a value greater than 4 as the batch size.
 
 
 ## Change Log
-This repository was last updated to **v1.0.3** on **2022.09.09**.  
+This repository was last updated to **v1.0.3** on **2022.09.10.**.  
 Check [changelog.md](changelog.MD) for detailed update history.
 
 

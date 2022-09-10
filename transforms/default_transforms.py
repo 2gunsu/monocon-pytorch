@@ -376,7 +376,8 @@ class RandomHorizontalFlip(BaseTransform):
 class Normalize(BaseTransform):
     def __init__(self, 
                  mean: List[float], 
-                 std: List[float]):
+                 std: List[float],
+                 keep_origin: bool = False):
         
         super().__init__(True, False, False, False)
             
@@ -388,10 +389,15 @@ class Normalize(BaseTransform):
         self.mean = mean
         self.std = std
         
+        self.keep_origin = keep_origin
+        
     def __call__(self, data_dict: Dict[str, Any]) -> Dict[str, Any]:
         
         img = data_dict['img']                          # (H, W, C) / np.ndarray
         img = img.astype(np.float32)
+        
+        if self.keep_origin:
+            data_dict['ori_img'] = img.copy()
         
         mean = np.array(self.mean).reshape(1, 1, -1)
         std = np.array(self.std).reshape(1, 1, -1)
@@ -449,3 +455,26 @@ class ToTensor(BaseTransform):
             data_dict['label'] = label
         return data_dict
     
+
+# Only used in testing for raw dataset
+class Convert_3D_to_4D(BaseTransform):
+    def __init__(self):
+        super().__init__(True, True, False, False)
+        
+    def __call__(self, data_dict: Dict[str, Any]) -> Dict[str, Any]:
+        
+        # Image Tensor
+        for k, v in data_dict.items():
+            if isinstance(v, torch.Tensor):
+                if v.dim() == 3:
+                    data_dict[k] = v.unsqueeze(0)
+        
+        # Image Metas
+        for k, v in data_dict['img_metas'].items():
+            data_dict['img_metas'][k] = [v,]
+            
+        
+        # Calib
+        data_dict['calib'] = [data_dict['calib']]
+                    
+        return data_dict

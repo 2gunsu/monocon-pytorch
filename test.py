@@ -9,7 +9,7 @@ from utils.engine_utils import tprint, load_cfg, generate_random_seed, set_rando
 
 
 # Arguments
-parser = argparse.ArgumentParser('MonoCon Tester')
+parser = argparse.ArgumentParser('MonoCon Tester for KITTI 3D Object Detection Dataset')
 parser.add_argument('--config_file',
                     type=str,
                     help="Path of the config file (.yaml)")

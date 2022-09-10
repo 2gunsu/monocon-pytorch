@@ -69,9 +69,13 @@ class MonoConDetector(nn.Module):
         pred_dict = self.forward(data_dict, return_loss=False)
         eval_format = self.head._get_eval_formats(data_dict, pred_dict, get_vis_format=get_vis_format)
         return eval_format
-        
+    
+    
+    def load_checkpoint(self, ckpt_file: str):
+        model_dict = torch.load(ckpt_file)['state_dict']['model']
+        self.load_state_dict(model_dict)
+
 
     def _extract_feat_from_data_dict(self, data_dict: Dict[str, Any]) -> torch.Tensor:
         img = data_dict['img']
         return self.neck(self.backbone(img))[0]
-    
