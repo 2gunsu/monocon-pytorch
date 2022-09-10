@@ -1,7 +1,10 @@
 ## Changelog
 
 ### v1.0.3 (2022.09.10)
-- Made ```torch.backend.cudnn.benchmark``` option configurable in ```monocon_config.py```.
+- Made ```torch.backend.cudnn.benchmark``` option configurable in ```monocon_config.py```. (**Issue #2**)
+  ```python
+  _C.USE_BENCHMARK = True
+  ```
 - Some code has been modified and added to enable video inference using kitti raw dataset.
 
 ### v1.0.2 (2022.08.30)
