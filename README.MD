@@ -4,7 +4,7 @@ We have removed the dependency on [mmdetection3d](https://github.com/open-mmlab/
 
 <img src="resources/monocon.jpg">  
 
-<img src="resources/raw_3d_video.gif">
+<img src="resources/demo_3d_video.gif">
 
 ## Features
 Unchecked items are currently being prepared.
@@ -102,6 +102,16 @@ python test.py  --config_file       [FILL]  # Config file (.yaml file)
                 --save_dir          [FILL]  # Path where visualization results will be saved to
 ```
 
+### Video Inference on KITTI Raw Dataset
+The KITTI Raw Dataset can be downloaded [here](https://www.cvlibs.net/datasets/kitti/raw_data.php?type=city).  
+Please download the calibration file as well as the images.
+```bash
+python test.py  --data_dir          [FILL]  # Path where sequence images are saved
+                --calib_file        [FILL]  # Calibration file (.txt file)
+                --checkpoint_file   [FILL]  # Checkpoint file (.pth file)
+                --save_dir          [FILL]  # Path of the directory to save the inferenced video
+```
+
 
 
 ## Quantitative Results
@@ -163,7 +173,7 @@ If possible, use a value greater than 4 as the batch size.
 
 
 ## Change Log
-This repository was last updated to **v1.0.3** on **2022.09.10.**.  
+This repository was last updated to **v1.0.3** on **2022.09.10**.  
 Check [changelog.md](changelog.MD) for detailed update history.
 
 
