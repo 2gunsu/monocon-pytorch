@@ -106,10 +106,10 @@ python test.py  --config_file       [FILL]  # Config file (.yaml file)
 The KITTI Raw Dataset can be downloaded [here](https://www.cvlibs.net/datasets/kitti/raw_data.php?type=city).  
 Please download the calibration file as well as the images.
 ```bash
-python test.py  --data_dir          [FILL]  # Path where sequence images are saved
-                --calib_file        [FILL]  # Calibration file (.txt file)
-                --checkpoint_file   [FILL]  # Checkpoint file (.pth file)
-                --save_dir          [FILL]  # Path of the directory to save the inferenced video
+python test_raw.py  --data_dir          [FILL]  # Path where sequence images are saved
+                    --calib_file        [FILL]  # Calibration file (.txt file)
+                    --checkpoint_file   [FILL]  # Checkpoint file (.pth file)
+                    --save_dir          [FILL]  # Path of the directory to save the inferenced video
 ```
 
 
