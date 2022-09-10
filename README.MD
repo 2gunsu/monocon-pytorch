@@ -32,6 +32,7 @@ cd monocon-pytorch
 
 # [Step 3]: See https://pytorch.org/get-started/locally/ and install pytorch for your environment.
 #           We have tested on version 1.11.0.
+#           It is recommended to install version 1.7.0 or higher.
 
 # [Step 4]: Install some packages using 'requirements.txt' in the repository.
 pip install -r requirements.txt
@@ -89,27 +90,31 @@ python train.py
 
 ### Evaluation
 ```bash
-python test.py  --config_file       [FILL]  # Config file (.yaml file)
-                --checkpoint_file   [FILL]  # Checkpoint file (.pth file)
-                --evaluate                  # Perform evaluation (Quantitative Results)
+python test.py  --config_file       [FILL]      # Config file (.yaml file)
+                --checkpoint_file   [FILL]      # Checkpoint file (.pth file)
+                --gpu_id            [Optional]  # Index of GPU to use for testing (Default: 0)
+                --evaluate                      # Perform evaluation (Quantitative Results)
 ```
 
 ### Inference
 ```bash
-python test.py  --config_file       [FILL]  # Config file (.yaml file)
-                --checkpoint_file   [FILL]  # Checkpoint file (.pth file)
-                --visualize                 # Perform visualization (Qualitative Results)
-                --save_dir          [FILL]  # Path where visualization results will be saved to
+python test.py  --config_file       [FILL]      # Config file (.yaml file)
+                --checkpoint_file   [FILL]      # Checkpoint file (.pth file)
+                --visualize                     # Perform visualization (Qualitative Results)
+                --gpu_id            [Optional]  # Index of GPU to use for testing (Default: 0)
+                --save_dir          [FILL]      # Path where visualization results will be saved to
 ```
 
 ### Video Inference on KITTI Raw Dataset
-The KITTI Raw Dataset can be downloaded [here](https://www.cvlibs.net/datasets/kitti/raw_data.php?type=city).  
-Please download the calibration file as well as the images.
+The KITTI Raw Dataset can be downloaded by scene from [here](https://www.cvlibs.net/datasets/kitti/raw_data.php?type=city). (You will probably need to log in.)  
+There are 4 download links for each scene, of which, please download only **"synced+rectified data"** and **"calibration"**.
 ```bash
-python test_raw.py  --data_dir          [FILL]  # Path where sequence images are saved
-                    --calib_file        [FILL]  # Calibration file (.txt file)
-                    --checkpoint_file   [FILL]  # Checkpoint file (.pth file)
-                    --save_dir          [FILL]  # Path of the directory to save the inferenced video
+python test_raw.py  --data_dir          [FILL]      # Path where sequence images are saved
+                    --calib_file        [FILL]      # Calibration file ("calib_cam_to_cam.txt")
+                    --checkpoint_file   [FILL]      # Checkpoint file (.pth file)
+                    --gpu_id            [Optional]  # Index of GPU to use for testing (Default: 0)
+                    --fps               [Optional]  # FPS of the result video (Default: 25)
+                    --save_dir          [FILL]      # Path of the directory to save the result video
 ```
 
 
