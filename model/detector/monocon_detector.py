@@ -41,7 +41,13 @@ class MonoConDetector(nn.Module):
             head_config = default_head_config
         if test_config is None:
             test_config = default_test_config
-        self.head = MonoConDenseHeads(test_config=test_config, **head_config)
+            
+        if num_dla_layers in [34, 46]:
+            head_in_ch = 64
+        else:
+            head_in_ch = 128
+            
+        self.head = MonoConDenseHeads(in_ch=head_in_ch, test_config=test_config, **head_config)
         
         
     def forward(self, data_dict: Dict[str, Any], return_loss: bool = True) -> Tuple[Dict[str, torch.Tensor]]:
