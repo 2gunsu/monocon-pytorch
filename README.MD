@@ -10,6 +10,7 @@ We have removed the dependency on [mmdetection3d](https://github.com/open-mmlab/
 Unchecked items are currently being prepared.
 - [x] Single-GPU Training
 - [x] KITTI Evaluation
+- [ ] KITTI Submission Format Generation
 - [ ] Multi-GPU Training
 - [ ] Fancy Logger
 - [x] Visualization (2D Bounding Box + Projected 3D Bounding Box)
@@ -104,6 +105,9 @@ python test.py  --config_file       [FILL]      # Config file (.yaml file)
                 --gpu_id            [Optional]  # Index of GPU to use for testing (Default: 0)
                 --save_dir          [FILL]      # Path where visualization results will be saved to
 ```
+
+### Submission Format Generation
+Will be added later 😢
 
 ### Video Inference on KITTI Raw Dataset
 The KITTI Raw Dataset can be downloaded by scene from [here](https://www.cvlibs.net/datasets/kitti/raw_data.php?type=city). (You will probably need to log in.)  
