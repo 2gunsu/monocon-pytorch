@@ -95,6 +95,10 @@ class RandomCrop3D(BaseTransform):
             new_mask = np.array(new_mask)
             updated_mask = np.logical_and(ori_mask, new_mask)
             
+            # to solve the problem: after random crop, the target becomes to None, just return original data
+            if not(new_mask.any()):
+                return data_dict
+            
             # 'gt_bboxes' and 'gt_labels'
             data_dict['label']['gt_bboxes'] = (gt_bboxes * updated_mask[..., np.newaxis])
             data_dict['label']['gt_labels'] *= updated_mask
