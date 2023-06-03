@@ -8,7 +8,7 @@ We have removed the dependency on [mmdetection3d](https://github.com/open-mmlab/
 
 ## Features
 Unchecked items are currently being prepared.  
-(Currently, we only have a single GPU, so implementation for Multi-GPU is limited.)
+(Currently, we only have a single GPU, so implementation for Multi-GPU is limited for now.)
 - [x] Single-GPU Training
 - [x] KITTI Evaluation
 - [ ] KITTI Submission Format Generation
