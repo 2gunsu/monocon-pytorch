@@ -87,8 +87,7 @@ The structure of the data files should be as below.
 │
 └── testing
     ├── calib
-    ├── image_2
-    └── label_2
+    └── image_2
 ```
 
 
