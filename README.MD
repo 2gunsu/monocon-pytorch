@@ -36,15 +36,26 @@ cd monocon-pytorch
 #           It is recommended to install version 1.7.0 or higher.
 
 # [Step 4]: Install some packages using 'requirements.txt' in the repository.
+#           The version of numpy must be 1.22.4.
 pip install -r requirements.txt
+
+# [Step 5]
+conda install cudatoolkit
 ```
 
 ### Environments
-We have tested our code in the following environment.  
-Since the RTX A6000 does not support CUDA 10 version, we could not confirm the operation in CUDA 10 or lower environments.
+We have tested our code in the following environments.  
+Since the RTX A6000 and RTX 4090 does not support CUDA 10 version, we could not confirm the operation in CUDA 10 or lower environments.
+
+#### [1]
 | OS                 | Python       | Pytorch      | CUDA         | GPU                   | NVIDIA Driver |
 | :----------------: | :----------: | :----------: | :----------: | :-------------------: | :-----------: |
 | Ubuntu 18.04.5 LTS | 3.8.13       | 1.11.0       | 11.4         | NVIDIA RTX A6000      | 470.129.06    |
+
+#### [2]
+| OS                 | Python       | Pytorch      | CUDA         | GPU                   | NVIDIA Driver |
+| :----------------: | :----------: | :----------: | :----------: | :-------------------: | :-----------: |
+| Ubuntu 20.04.6 LTS | 3.8.16       | 1.13.1       | 11.7         | NVIDIA RTX 4090       | 530.41.03     |
 
 
 
