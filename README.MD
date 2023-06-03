@@ -47,12 +47,12 @@ conda install cudatoolkit
 We have tested our code in the following environments.  
 Since the RTX A6000 and RTX 4090 does not support CUDA 10 version, we could not confirm the operation in CUDA 10 or lower environments.
 
-#### [Case 1]
+#### [Environment 1]
 | OS                 | Python       | Pytorch      | CUDA         | GPU                   | NVIDIA Driver |
 | :----------------: | :----------: | :----------: | :----------: | :-------------------: | :-----------: |
 | Ubuntu 18.04.5 LTS | 3.8.13       | 1.11.0       | 11.4         | NVIDIA RTX A6000      | 470.129.06    |
 
-#### [Case 2]
+#### [Environment 2]
 | OS                 | Python       | Pytorch      | CUDA         | GPU                   | NVIDIA Driver |
 | :----------------: | :----------: | :----------: | :----------: | :-------------------: | :-----------: |
 | Ubuntu 20.04.6 LTS | 3.8.16       | 1.13.1       | 11.7         | NVIDIA RTX 4090       | 530.41.03     |
