@@ -44,7 +44,7 @@ conda install cudatoolkit
 ```
 
 ### Environments
-We have tested our code in the following environments.  
+We have tested our code in the following 3 environments.  
 Since the RTX A6000 and RTX 4090 does not support CUDA 10 version, we could not confirm the operation in CUDA 10 or lower environments.
 
 #### [Environment 1]
@@ -56,6 +56,11 @@ Since the RTX A6000 and RTX 4090 does not support CUDA 10 version, we could not 
 | OS                 | Python       | Pytorch      | CUDA         | GPU                   | NVIDIA Driver |
 | :----------------: | :----------: | :----------: | :----------: | :-------------------: | :-----------: |
 | Ubuntu 20.04.6 LTS | 3.8.16       | 1.13.1       | 11.7         | NVIDIA RTX 4090       | 530.41.03     |
+
+#### [Environment 3]
+| OS                 | Python       | Pytorch      | CUDA         | GPU                   | NVIDIA Driver |
+| :----------------: | :----------: | :----------: | :----------: | :-------------------: | :-----------: |
+| Ubuntu 20.04.6 LTS | 3.8.16       | 2.0.1        | 11.8         | NVIDIA RTX 4090       | 530.41.03     |
 
 
 
@@ -151,7 +156,8 @@ You can download the weight file and config file for the above pretrained model 
 Change the value of ```DATA.ROOT``` in the ```config.yaml``` file to the KITTI data path.  
 
 Depending on the starting seed, the above performance may not be reproduced.  
-The table below shows the performance obtained through 5 independent training, and it can be seen that there is some performance deviation.   
+The table below shows the performance obtained through 5 independent training, and it can be seen that there is some performance deviation.
+#### [Results from Environment 1]
 |               | AP40@Easy     | AP40@Mod.     | AP40@Hard     |
 | ---------     | ---------     |-----------    |-----------    |
 | Train #1      | 26.03         | 19.02         | 15.92         |
