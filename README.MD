@@ -12,7 +12,7 @@ Unchecked items are currently being prepared.
 - [x] Single-GPU Training
 - [x] KITTI Evaluation
 - [ ] KITTI Submission Format Generation
-- [ ] Multi-GPU Training
+- [ ] ~~Multi-GPU Training~~
 - [x] Visualization (2D Bounding Box + Projected 3D Bounding Box)
 - [x] Visualization (Bird Eye's View)
 - [x] Video Inference using KITTI Raw Data Sequences
@@ -122,6 +122,8 @@ python test.py  --config_file       [FILL]      # Config file (.yaml file)
 ```
 
 ### Submission Format Generation
+```bash
+```
 Will be added later 😢
 
 ### Video Inference on KITTI Raw Dataset
