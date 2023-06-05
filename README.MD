@@ -158,10 +158,10 @@ You can download the weight file and config file for the above pretrained model 
 Change the value of ```DATA.ROOT``` in the ```config.yaml``` file to the KITTI data path.  
 
 Depending on the starting seed, the above performance may not be reproduced.  
-The table below shows the performance obtained through 5 independent training, and it can be seen that there is some performance deviation.
+The tables below show the performance obtained through 5 independent random seed training, and it can be seen that there is some performance deviation.
 #### [Results from Environment 1]
 |               | AP40@Easy     | AP40@Mod.     | AP40@Hard     |
-| ---------     | ---------     |-----------    |-----------    |
+| ---------     | :---------:   |:-----------:  |:-----------:  |
 | Train #1      | 26.03         | 19.02         | 15.92         |
 | Train #2      | 25.50         | 18.40         | 15.47         |
 | Train #3      | 23.61         | 16.85         | 14.79         |
@@ -169,6 +169,17 @@ The table below shows the performance obtained through 5 independent training, a
 | Train #5      | 24.29         | 17.95         | 15.32         |
 | **Mean**      | 24.57         | 17.92         | 15.24         |
 | **Std**       | 1.16          | 0.85          | 0.51          |
+
+#### [Results from Environment 2]
+|               | AP40@Easy     | AP40@Mod.     | AP40@Hard     |
+| ---------     | :---------:   |:-----------:  |:-----------:  |
+| Train #1      | 23.22         | 17.84         | 15.10         |
+| Train #2      | 25.19         | 17.58         | 15.40         |
+| Train #3      | 25.01         | 17.93         | 15.33         |
+| Train #4      | 24.31         | 17.33         | 15.20         |
+| Train #5      | 24.11         | 17.95         | 15.22         |
+| **Mean**      | 24.37         | 17.73         | 15.25         |
+| **Std**       |  0.79         |  0.27         |  0.12         |
 
 
 ## Qualitative Results  
